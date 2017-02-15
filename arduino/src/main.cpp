@@ -46,10 +46,13 @@ void loop(void) {
   }
   r1_vout_avg /= AVG_SAMPLES;
   r1_vout_avg_2 /= AVG_SAMPLES;
-  
+
   // Calculate thermistor R
-  r1 = R2 * (( 1023 / r1_vout_avg ) - 1 );
-  r1_2 = R2 * (( 1023 / r1_vout_avg_2 ) - 1 );
+  // r1 = R2 * (( 1023 / r1_vout_avg ) - 1 );
+  // r1_2 = R2 * (( 1023 / r1_vout_avg_2 ) - 1 );
+	// r_2 = (Vout * r_1) / (Vin - Vout)
+	r1 = ( r1_vout_avg * R2 ) / ( 1023 - r1_vout_avg );
+	r1_2 = ( r1_vout_avg_2 * R2 ) / ( 1023 - r1_vout_avg_2 );
 
 
   // Use Steinhart formula to calculate temperature (K)
